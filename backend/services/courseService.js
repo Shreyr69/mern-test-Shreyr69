@@ -27,3 +27,15 @@ export const deleteCourse = async (id) => {
   }
   return course;
 };
+
+export const updateCourse = async (id, { courseName, courseDescription, instructor }) => {
+  const course = await Course.findByIdAndUpdate(
+    id,
+    { courseName, courseDescription, instructor },
+    { new: true, runValidators: true }
+  );
+  if (!course) {
+    throw new Error('Course not found');
+  }
+  return course;
+};
